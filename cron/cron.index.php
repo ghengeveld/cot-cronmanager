@@ -1,29 +1,14 @@
-<?PHP
+<?php
 /* ====================
-[BEGIN_SED_EXTPLUGIN]
-Code=cron
-Part=index
-File=cron.index
+[BEGIN_COT_EXT]
 Hooks=index.first
-Tags=
-Order=10
-[END_SED_EXTPLUGIN]
+[END_COT_EXT]
 ==================== */
 
-/**
- * Automate script execution
- *
- * @package Cron Manager
- * @version 1.0
- * @author Koradhil
- * @copyright Webmojo
- * @license BSD
- */
+defined('COT_CODE') or die("Wrong URL.");
 
-defined('SED_CODE') or die("Wrong URL.");
+require_once cot_incfile('cron', 'plug');
 
-require_once('plugins/cron/inc/runcron.php');
-
-runcron('index');
+cron_run('index');
 
 ?>

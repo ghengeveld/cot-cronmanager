@@ -1,6 +1,6 @@
 <!-- BEGIN: CRON -->
 
-	<div class="error">{CRON_ERROR}</div>
+	{FILE "./{PHP.cfg.themes_dir}/{PHP.theme}/warnings.tpl"}
 	
 	<table class="cells">
 		<tr>
@@ -16,16 +16,18 @@
 		<!-- BEGIN: CRON_ROW -->
 		<tr>
 			<td>{CRON_ROW_TITLE}<br /><span class="small">{CRON_ROW_SCRIPT}</span></td>
-			<td>{CRON_ROW_FIRSTRUN}</td>
+			<td>{CRON_ROW_FIRSTRUN|cot_date('datetime_medium', $this)}</td>
 			<td>{CRON_ROW_DELAY}</td>
-			<td>{CRON_ROW_LASTRUN}</td>
-			<td>{CRON_ROW_NEXTRUN}</td>
+			<td><!-- IF {CRON_ROW_LASTRUN} > 0 -->{CRON_ROW_LASTRUN|cot_date('datetime_medium', $this)}<!-- ELSE -->-<!-- ENDIF --></td>
+			<td>{CRON_ROW_NEXTRUN|cot_date('datetime_medium', $this)}</td>
 			<td>{CRON_ROW_MODE}</td>
 			<td>{CRON_ROW_TRIGGER}</td>
 			<td><a href="{CRON_ROW_DELETE}"><img src="images/admin/delete.gif" alt="x" title="{PHP.L.Delete}" /></a></td>
 		</tr>
 		<!-- END: CRON_ROW -->
 	</table>
+
+	<p>Current time: {PHP.sys.now|cot_date('datetime_medium', $this)}</p>
 
 	<!-- BEGIN: CRON_ADD_FORM -->
 	<h3>{PHP.L.AddNewCron}</h3>
@@ -41,7 +43,7 @@
 		</tr>
 		<tr>
 			<td>{PHP.L.FirstRun}:</td>
-			<td>{CRON_ADD_FORM_FIRSTRUN} {PHP.L.GMT}</td>
+			<td>{CRON_ADD_FORM_FIRSTRUN}</td>
 		</tr>
 		<tr>
 			<td>{PHP.L.RunsEvery}:</td>
@@ -57,7 +59,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td>{CRON_ADD_FORM_SUBMIT}</td>
+			<td><button type="submit">{PHP.L.Submit}</button></td>
 		</tr>
 	</table>
 	</form>
